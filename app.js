@@ -20,9 +20,13 @@ app.get("/", function(req, res) {
 
 });
 
+app.get("/about", function(req, res) {
+  res.render("about", {aboutStartingContent: aboutContent});
+});
 
-
-
+app.get("/contact", function(req, res) {
+  res.render("contact", {contactStartingContent: contactContent});
+});
 
 
 
