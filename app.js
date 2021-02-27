@@ -18,42 +18,44 @@ app.use(express.static("public"));
 
 let posts = [];
 
-app.get("/", function(req, res) {
+app.get("/", function(req, res){
   res.render("home", {
-    StartingContent : homeStartingContent, 
+    startingContent: homeStartingContent,
     posts: posts
-  });
+    });
 });
 
-app.get("/about", function(req, res) {
-  res.render("about", {aboutStartingContent: aboutContent});
+app.get("/about", function(req, res){
+  res.render("about", {aboutContent: aboutContent});
 });
 
-app.get("/contact", function(req, res) {
-  res.render("contact", {contactStartingContent: contactContent});
+app.get("/contact", function(req, res){
+  res.render("contact", {contactContent: contactContent});
 });
 
-app.get("/compose", function(req, res) {
+app.get("/compose", function(req, res){
   res.render("compose");
 });
 
-app.post("/compose", function(req, res) {
+app.post("/compose", function(req, res){
   const post = {
     title: req.body.postTitle,
     content: req.body.postBody
   };
+
   posts.push(post);
 
   res.redirect("/");
+
 });
 
-app.get("/posts/:postName", function(req, res) {
+app.get("/posts/:postName", function(req, res){
   const requestedTitle = _.lowerCase(req.params.postName);
 
   posts.forEach(function(post){
-    const storedTitle= _.lowerCase(post.title);
+    const storedTitle = _.lowerCase(post.title);
 
-    if(storedTitle === requestedTitle) {
+    if (storedTitle === requestedTitle) {
       res.render("post", {
         title: post.title,
         content: post.content
